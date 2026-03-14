@@ -1,23 +1,7 @@
-# ui_server_with_progress.py
 import zmq
 import time
 import json  # 关键：导入 json 模块
 import os
-import ctypes
-
-# 完全隐藏控制台窗口
-def hide_console():
-    """完全隐藏控制台窗口"""
-    # 获取控制台窗口句柄
-    hwnd = ctypes.windll.kernel32.GetConsoleWindow()
-    if hwnd:
-        # 隐藏窗口
-        ctypes.windll.user32.ShowWindow(hwnd, 0)  # 0 表示隐藏窗口
-        # 确保窗口不会被激活
-        ctypes.windll.user32.SetWindowPos(hwnd, 0, 0, 0, 0, 0, 0x0001)
-
-# 调用函数隐藏控制台窗口
-hide_console()
 
 def parse_rate(rate_str):
     """解析速度字符串，返回以 MB/s 为单位的数值"""
