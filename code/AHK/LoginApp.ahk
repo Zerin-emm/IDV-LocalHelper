@@ -20,7 +20,6 @@ WriteLog("程序启动")
 global logFile := A_ScriptDir . "\run\log.txt"
 global lastLogSize := 0
 global proxyStatus := "登录代理运行中"
-global initialized := false
 global portOccupied := false
 global gameStarted := false
 
@@ -36,34 +35,24 @@ if (!FileExist(logFile)) {
 MyGui := Gui(, "IDV-Login")
 MyGui.SetFont("s14", "Microsoft YaHei")
 myGui.Add("Text", "x10 y10 w460 h25", "第五人格登录器")
-; 状态显示区
 MyGui.SetFont("s12", "Microsoft YaHei")
 MyGui.Add("Text", "x10 y42 w60 h20", "状态:")
 statusText := MyGui.Add("Text", "x55 y42 w120 h20", "登录代理运行中")
 MyGui.Add("Text", "x200 y42 w60 h20", "版本:")
 MyGui.Add("Text", "x245 y42 w120 h20", "V1.0.0")
 MyGui.Add("Text", "x325 y42 w60 h20", "帮助:")
-; 网页链接（超链接）
 webLink := MyGui.Add("Text", "x370 y42 w80 h20 cBlue", "网页链接")
 webLink.OnEvent("Click", (*) => Run("https://zcn2uzvdaiwh.feishu.cn/wiki/space/7611520609637420221?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home"))
-
-; 请求列表标题
 MyGui.Add("Text", "x10 y70 w60 h20", "请求:")
-
 MyGui.SetFont("s11", "Microsoft YaHei")
-; 请求列表控件（使用 Edit 控件，支持鼠标划词，背景色为 247,247,247）
 requestList := MyGui.Add("Edit", "x10 y99 w440 h200 -Wrap +Multi +ReadOnly +VScroll +Background0xFDFDFD")
-
-; 功能按钮
 MyGui.Add("Button", "x460 y99 w100 h50", "启动登录代理").OnEvent("Click", RunRun)
 MyGui.Add("Button", "x460 y174 w100 h50", "停止登录代理").OnEvent("Click", KillRun)
 MyGui.Add("Button", "x460 y249 w100 h50", "启动游戏").OnEvent("Click", StartGame)
 
-; 窗口显示后，设置定时器
-; 1. 50ms 后清除选择状态
+; 窗口显示后，设置定时器 , 50ms 后清除选择状态
 SetTimer(ClearSelection, 50)
 
-; 显示窗口（适配控件尺寸）
 MyGui.Show("w570 h310")
 
 ; 开始定时检测run.exe的运行情况（1000ms间隔）
@@ -71,7 +60,6 @@ SetTimer(CheckRunStatus, 1000)
 
 RunRun(*) {
     WriteLog("点击了启动登录代理按钮")
-    ; 先停止旧的 run.exe 进程
     RunWait("taskkill /F /IM run.exe", "", "Hide")
     ; 执行同目录下的 run.exe，使用 Hide 参数静默执行
     Run(A_ScriptDir . "\run\run.exe", A_ScriptDir, "Hide")
@@ -84,7 +72,6 @@ RunRun(*) {
 
 KillRun(*) {
     WriteLog("点击了停止登录代理按钮")
-    ; 使用 taskkill 命令强制结束进程
     RunWait("taskkill /F /IM run.exe", "", "Hide")
     ; 清屏一次
     global requestList
@@ -96,7 +83,6 @@ KillRun(*) {
     WriteLog("登录代理已停止")
 }
 
-; 启动游戏
 StartGame(*) {
     WriteLog("点击了启动游戏按钮")
     Pos := InStr(A_ScriptDir, "idv-login",, 1)
@@ -109,11 +95,11 @@ StartGame(*) {
     }
 }
 
-; 使用正确的 AutoHotkey v2 语法
 LaunchTimer() {
     WriteLog("定时器触发，启动登录代理")
     RunRun()
 }
+
 ; 启动定时器，只执行一次
 SetTimer(LaunchTimer, -500)
 
@@ -137,11 +123,10 @@ ClearSelection() {
 
 ; 实时读取日志文件的函数
 ReadLogFile() {
-    global logFile, lastLogSize, requestList, portOccupied, gameStarted, initialized
+    global logFile, lastLogSize, requestList, portOccupied, gameStarted
     
     if (!FileExist(logFile))
         return
-    
     try
         fileSize := FileGetSize(logFile)
     catch
@@ -183,35 +168,23 @@ ReadLogFile() {
                         continue
                     }
                     portOccupied := true
-                    Sleep(1000)
                     msgContent := processName . " 占用了 443 端口 即将强制终止 "
                     WriteLog("弹窗提示: " . msgContent)
                     result := MsgBox(msgContent, "443 端口被占用", 16 + 0)
                     
                     if result = "OK" {
                         WriteLog("用户选择终止进程: " . processName)
-                        if (pid != "") {
-                            RunWait("*RunAs cmd.exe /c taskkill /F /PID " . pid, "", "Hide")
-                            Sleep(1000)
-                            RunRun()
-                        } else if (processName != "") {
-                            RunWait("*RunAs cmd.exe /c taskkill /F /IM " . processName, "", "Hide")
-                            Sleep(1000)
-                            RunRun()
-                        }
+                        RunWait("*RunAs cmd.exe /c taskkill /F /PID " . pid, "", "Hide")
+                        Sleep(1000)
+                        RunRun()
                     }
                     break
-                } else if (InStr(line, "初始化程序") && !initialized) {
+                } else if (InStr(line, "初始化程序")) {
                     WriteLog("检测到需要初始化程序")
-                    Sleep(1000)
                     result := MsgBox("未进行初始化 将运行初始化程序", "未初始化", 16 + 0)
                     if result = "OK" {
                         WriteLog("用户选择运行初始化程序")
-                        Run("*RunAs " . A_ScriptDir . "\init\init.exe", A_ScriptDir)
-                        while (ProcessExist("init.exe")) {
-                            Sleep(500)
-                        }
-                        initialized := true
+                        RunWait("*RunAs " . A_ScriptDir . "\init\init.exe", A_ScriptDir)
                         WriteLog("初始化程序执行完成")
                     }
                     break
@@ -231,7 +204,6 @@ ReadLogFile() {
     for line in lines {
         if (InStr(line, "代理服务运行中") && !gameStarted && !portOccupied) {
             WriteLog("检测到代理服务运行中，准备启动游戏")
-            Sleep(100)
             StartGame()
             gameStarted := true
             WriteLog("游戏已启动")
