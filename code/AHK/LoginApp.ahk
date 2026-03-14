@@ -231,7 +231,7 @@ ReadLogFile() {
     for line in lines {
         if (InStr(line, "代理服务运行中") && !gameStarted && !portOccupied) {
             WriteLog("检测到代理服务运行中，准备启动游戏")
-            Sleep(2000)
+            Sleep(100)
             StartGame()
             gameStarted := true
             WriteLog("游戏已启动")
