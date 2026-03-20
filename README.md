@@ -1,7 +1,7 @@
-本项目基于 [Alexander-Porter/idv-login](https://github.com/Alexander-Porter/idv-login) 开发，遵循 GPL-3.0 许可证。
+本项目基于 [KKeygen/idv-login](https://github.com/KKeygen/idv-login) 开发，遵循 GPL-3.0 许可证。
 ## 原项目
 原项目作者：Alexander-Porter
-原项目地址：https://github.com/Alexander-Porter/idv-login
+原项目地址：[KKeygen/idv-login](https://github.com/KKeygen/idv-login)
 原项目版权信息：
 Copyright (c) Alexander-Porter
 ## 1. 开源协议
