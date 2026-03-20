@@ -1,9 +1,9 @@
 本项目基于 [KKeygen/idv-login](https://github.com/KKeygen/idv-login) 开发，遵循 GPL-3.0 许可证。
 ## 原项目
 原项目作者：Alexander-Porter
-原项目地址：[KKeygen/idv-login](https://github.com/KKeygen/idv-login)
+原项目地址：[https://github.com/KKeygen/idv-login](https://github.com/KKeygen/idv-login)
 原项目版权信息：
-Copyright (c) Alexander-Porter
+Copyright (c) KKeygen
 ## 1. 开源协议
 本仓库使用 ``GNU General Public License 3`` 进行开源，请使用/分发本仓库的软件或源代码或衍生产品时请遵守该开源协议，并保留原始项目地址。**需要特别注意的是，根据``GPLv3``许可证的要求，如果你使用了本仓库的代码进行二次开发，那么您的代码也必须使用`GPLv3`协议开源。**
 
