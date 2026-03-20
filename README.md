@@ -1,6 +1,6 @@
 本项目基于 [KKeygen/idv-login](https://github.com/KKeygen/idv-login) 开发，遵循 GPL-3.0 许可证。
 ## 原项目
-原项目作者：Alexander-Porter
+原项目作者：[KKeygen](https://github.com/KKeygen)
 原项目地址：[https://github.com/KKeygen/idv-login](https://github.com/KKeygen/idv-login)
 原项目版权信息：
 Copyright (c) KKeygen
