@@ -1,7 +1,12 @@
 #SingleInstance Force
 #Requires AutoHotkey v2.0
 #NoTrayIcon
-
+;@Ahk2Exe-SetName        IDV-Login
+;@Ahk2Exe-SetVersion     1.0.0
+;@Ahk2Exe-SetCompanyName Zerin
+;@Ahk2Exe-SetCopyright   Copyright © 2026 Zerin
+;@Ahk2Exe-SetDescription IDV-Login
+;@Ahk2Exe-SetLanguage    0x0804
 ; 日志文件路径
 global appLogFile := A_ScriptDir . "\LoginApp_log.txt"
 
@@ -170,9 +175,9 @@ ReadLogFile() {
                     portOccupied := true
                     msgContent := processName . " 占用了 443 端口 即将强制终止 "
                     WriteLog("弹窗提示: " . msgContent)
-                    result := MsgBox(msgContent, "443 端口被占用", 16 + 0)
+                    result := DllCall("user32\MessageBox", "Ptr", MyGui.Hwnd, "Str", msgContent, "Str", "443 端口被占用", "UInt", 0x10)
                     
-                    if result = "OK" {
+                    if result = 1 {
                         WriteLog("用户选择终止进程: " . processName)
                         RunWait("*RunAs cmd.exe /c taskkill /F /PID " . pid, "", "Hide")
                         Sleep(1000)
@@ -181,8 +186,8 @@ ReadLogFile() {
                     break
                 } else if (InStr(line, "初始化程序")) {
                     WriteLog("检测到需要初始化程序")
-                    result := MsgBox("未进行初始化 将运行初始化程序", "未初始化", 16 + 0)
-                    if result = "OK" {
+                    result := DllCall("user32\MessageBox", "Ptr", MyGui.Hwnd, "Str", "未进行初始化 将运行初始化程序", "Str", "未初始化", "UInt", 0x10)
+                    if result = 1 {
                         WriteLog("用户选择运行初始化程序")
                         RunWait("*RunAs " . A_ScriptDir . "\init\init.exe", A_ScriptDir)
                         WriteLog("初始化程序执行完成")

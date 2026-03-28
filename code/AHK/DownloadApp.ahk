@@ -1,7 +1,12 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 #NoTrayIcon
-
+;@Ahk2Exe-SetName        IDV-Download
+;@Ahk2Exe-SetVersion     1.0.0
+;@Ahk2Exe-SetCompanyName Zerin
+;@Ahk2Exe-SetCopyright   Copyright © 2026 Zerin
+;@Ahk2Exe-SetDescription IDV-Download
+;@Ahk2Exe-SetLanguage    0x0804
 ; 日志文件路径
 progressFile := A_ScriptDir . "\DownloadApp\UI_Server\UI_Server_data\Download_Progress.txt"
 LogFile := A_ScriptDir . "\DownloadApp\DownloadApp_log.txt"
@@ -176,7 +181,7 @@ StartGameDownload(*)
         } else {
             WriteLog("未检测到 downloadIPC.exe 进程")
             statusText.Text := "启动失败"
-            MsgBox("下载程序启动失败", "错误", "OK Iconx")
+            DllCall("user32\MessageBox", "Ptr", MainGui.Hwnd, "Str", "下载程序启动失败", "Str", "错误", "UInt", 0x10)
             ProcessClose("UI_Server.exe")
         }
     }
@@ -197,7 +202,7 @@ CheckDownloadProcess() {
         WriteLog("downloadIPC.exe 进程已退出，状态更新为下载完成")
         
         ; 弹窗提示
-        MsgBox("下载已完成", "提示", "OK Iconi")
+        DllCall("user32\MessageBox", "Ptr", MainGui.Hwnd, "Str", "下载已完成", "Str", "提示", "UInt", 0x40)
         
         ; 结束 UI_Server.exe 进程
         ProcessClose("UI_Server.exe")
