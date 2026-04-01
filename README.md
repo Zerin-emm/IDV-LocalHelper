@@ -17,5 +17,3 @@ Copyright (c) KKeygen
 ## 3.使用方式
 详见[https://zcn2uzvdaiwh.feishu.cn/wiki/URouw4itXiSSoAkxLirchjDHnWe](https://zcn2uzvdaiwh.feishu.cn/wiki/URouw4itXiSSoAkxLirchjDHnWe)
 
-## Star History
-![Stat History](https://stat-history.com/svg/Zerin-emm/IDV-LocalHelper/)
