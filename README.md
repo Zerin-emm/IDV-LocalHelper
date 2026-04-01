@@ -17,3 +17,6 @@ Copyright (c) KKeygen
 ## 3.使用方式
 详见[https://zcn2uzvdaiwh.feishu.cn/wiki/URouw4itXiSSoAkxLirchjDHnWe](https://zcn2uzvdaiwh.feishu.cn/wiki/URouw4itXiSSoAkxLirchjDHnWe)
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Zerin-emm/IDV-LocalHelper&type=Date)](https://www.star-history.com/#Zerin-emm/IDV-LocalHelper&Date)
