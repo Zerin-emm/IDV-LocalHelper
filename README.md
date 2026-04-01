@@ -16,3 +16,6 @@ Copyright (c) KKeygen
 - 如果该软件侵犯了网易公司的相关权益，请相关人员及时与我们取得联系，我们将第一时做出处理。
 ## 3.使用方式
 详见[https://zcn2uzvdaiwh.feishu.cn/wiki/URouw4itXiSSoAkxLirchjDHnWe](https://zcn2uzvdaiwh.feishu.cn/wiki/URouw4itXiSSoAkxLirchjDHnWe)
+
+## Star History
+![Stat History](https://stat-history.com/svg/Zerin-emm/IDV-LocalHelper/)
