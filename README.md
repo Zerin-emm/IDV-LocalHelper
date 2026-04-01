@@ -19,4 +19,5 @@ Copyright (c) KKeygen
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/image?repos=Zerin-emm/IDV-LocalHelper&type=date&legend=top-left)](https://www.star-history.com/?repos=Zerin-emm%2FIDV-LocalHelper&type=date&legend=top-left)
+[![Star History Chart](https://api.star-history.com/svg?repos=Zerin-emm/IDV-LocalHelper&type=Date)](https://www.star-history.com/#Zerin-emm/IDV-LocalHelper&Date)
+
